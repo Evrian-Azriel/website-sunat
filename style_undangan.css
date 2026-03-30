@@ -1,0 +1,145 @@
+/* --- style_undangan.css --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* Background motif biru (Anda bisa ganti path-nya nanti) */
+    background-color: #121e42; /* Biru Navy Gelap */
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+/* Membatasi lebar undangan agar rapi di HP dan PC */
+.undangan-container {
+    max-width: 500px;
+    width: 100%;
+    background-color: rgba(18, 30, 66, 0.95);
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    overflow: hidden;
+}
+
+/* --- Section Umum --- */
+section {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+/* --- Pastikan box-border juga rata tengah sempurna --- */
+.box-border {
+    border: 1px solid #c5a059;
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 90%;
+    text-align: center; /* Memastikan teks di dalam kotak garis selalu di tengah */
+}
+
+.gold-text {
+    color: #c5a059;
+}
+
+.title-font {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+}
+
+/* --- Section Spesifik --- */
+/* --- Tambahkan text-align: center di sini --- */
+.date-banner {
+    background-color: #c5a059;
+    color: white;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-align: center; /* Ini yang membuat tulisan tanggal ke tengah */
+}
+
+.profile-section img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 3px solid #c5a059;
+    margin-bottom: 15px;
+}
+
+.details-section, .form-section {
+    background-color: #f4ece1; /* Warna Krem */
+    color: #333;
+}
+
+.map-container {
+    width: 100%;
+    height: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 20px;
+    border: 2px solid #c5a059;
+}
+
+/* --- Styling Form --- */
+.form-box {
+    background: #f4ece1;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Tombol Kehadiran (Radio Button dibuat seperti tombol) */
+/* --- Styling Checklist Kehadiran --- */
+.checklist-group {
+    display: flex;
+    flex-direction: column; /* Membuat pilihan berbaris ke bawah */
+    gap: 12px;
+    margin-bottom: 20px;
+    padding: 5px 0;
+}
+
+.checklist-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    color: #333;
+    cursor: pointer;
+}
+
+.checklist-item input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #1f306e; /* Mengubah warna centang menjadi biru navy */
+}
+/* Warna tombol jika dipilih */
+#hadir:checked + .radio-label { background: #1f306e; color: white; }
+#tidak_hadir:checked + .radio-label { background: #888; color: white; }
+
+.btn-submit {
+    width: 100%;
+    background-color: #c5a059;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+}

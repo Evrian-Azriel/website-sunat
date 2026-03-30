@@ -1,0 +1,137 @@
+<?php
+// Konfigurasi Database (Sesuaikan dengan settingan XAMPP/Laragon Anda)
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db   = "undangan_khitan";
+
+// Membuat koneksi ke database
+$koneksi = mysqli_connect($host, $user, $pass, $db);
+
+$pesan_form = "";
+
+// Logika ketika tombol submit ditekan
+if(isset($_POST['submit_tamu'])) {
+    $nama = mysqli_real_escape_string($koneksi, $_POST['nama']);
+    $telepon = mysqli_real_escape_string($koneksi, $_POST['telepon']);
+    $alamat = mysqli_real_escape_string($koneksi, $_POST['alamat']);
+    $ucapan = mysqli_real_escape_string($koneksi, $_POST['ucapan']);
+    $kehadiran = mysqli_real_escape_string($koneksi, $_POST['kehadiran']);
+
+    // Menyimpan data ke tabel buku_tamu
+    $query = "INSERT INTO buku_tamu (nama, telepon, alamat, ucapan, kehadiran) 
+              VALUES ('$nama', '$telepon', '$alamat', '$ucapan', '$kehadiran')";
+    
+    if(mysqli_query($koneksi, $query)) {
+        $pesan_form = "<div style='color: green; text-align: center; margin-bottom: 15px; font-weight: 600;'>Terima kasih, do'a dan ucapan Anda telah terkirim!</div>";
+    } else {
+        $pesan_form = "<div style='color: red; text-align: center; margin-bottom: 15px; font-weight: 600;'>Gagal mengirim data. Silakan coba lagi.</div>";
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Undangan Khitanan</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style_undangan.css">
+</head>
+<body>
+
+<div class="undangan-container">
+
+    <section class="greeting-section">
+        <div class="box-border">
+            <h3 class="title-font" style="margin-bottom: 10px;">Assalamu'alaikum Wr Wb</h3>
+            <p style="font-size: 13px; line-height: 1.6;">Dengan Rahmat Allah yang Maha Kuasa Insya Allah kami akan melangsungkan Syukuran Khitanan<br><br>Yang Insya Allah akan dilaksanakan pada :</p>
+        </div>
+    </section>
+
+    <div class="date-banner">
+        SABTU, 04 APRIL 2026
+    </div>
+
+    <section class="profile-section">
+        <img src="media/anak.png" alt="Foto Anak">
+        <h2 class="title-font gold-text" style="font-size: 28px; margin-top: 10px;">Malik Ainul Yaqin Sya'bani</h2>
+        <p style="font-size: 14px; margin-top: 5px; line-height: 1.6;">Putra Dari :<br>Bpk. Anas Fuadi & Ibu Sulastari Suhandi</p>
+    </section>
+
+    <section class="details-section">
+        <h4 style="margin-bottom: 10px; color: #1f306e;">Bertempat Di :</h4>
+        <p style="font-size: 14px; margin-bottom: 25px; line-height: 1.6;">Perum Graha Persada Mansion Blok A1 No. 8, Kp. Pulo Desa Sumberjaya, Kec. Tambun Selatan</p>
+        
+        <h4 style="margin-bottom: 10px; color: #1f306e;">Acara : Jam 08.00 - 11.00</h4>
+        <p style="font-size: 14px; font-weight: 600; margin-bottom: 5px;">Maulid & Pengajian Di Hadiri Oleh :</p>
+        <p style="font-size: 14px; line-height: 1.6;">Habib Ja'far Sadiq Bin Al Amaqfurlah Al Walid<br>Habib Abdullah Bin Husein Bin Toha Al-Haddad</p>
+    </section>
+
+<section class="map-section">
+        <h3 class="gold-text title-font" style="margin-bottom: 15px;">Peta Lokasi Acara</h3>
+        <div class="map-container">
+            <iframe 
+                src="https://maps.google.com/maps?q=Perum%20Graha%20Persada%20Mansion%20Blok%20A1%20No.%208,%20Kp.%20Pulo%20Desa%20Sumberjaya,%20Kec.%20Tambun%20Selatan&t=&z=16&ie=UTF8&iwloc=&output=embed" 
+                width="100%" 
+                height="100%" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </section>
+
+    <section class="closing-section">
+        <div class="box-border" style="font-size: 13px; line-height: 1.6;">
+            Merupakan kehormatan dan kebahagiaan bagi kami sekeluarga apabila Bapak/Ibu/Saudara/i berkenan Hadir, Sekaligus memberikan Do'a restu kepada Putra Kami.<br><br>
+            Atas kehadiran dan Do'anya kami ucapkan Terimakasih.<br>
+            Semoga Allah SWT senantiasa melimpahkan Rahmat Karunianya.
+        </div>
+    </section>
+
+    <section class="form-section">
+        <h3 style="margin-bottom: 20px; color: #1f306e;" class="title-font">Buku Tamu & RSVP</h3>
+        
+        <?php echo $pesan_form; ?>
+
+        <div class="form-box">
+            <form action="" method="POST">
+                <div class="form-group">
+                    <input type="text" name="nama" placeholder="Nama Lengkap" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="telepon" placeholder="No. Telepon">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="alamat" placeholder="Alamat" required>
+                </div>
+                <div class="form-group">
+                    <textarea name="ucapan" rows="4" placeholder="Do'a dan Ucapan" required></textarea>
+                </div>
+                
+                <div class="checklist-group">
+                    <label class="checklist-item">
+                        <input type="radio" name="kehadiran" value="Hadir" required>
+                        Saya bisa Hadir
+                    </label>
+                    
+                    <label class="checklist-item">
+                        <input type="radio" name="kehadiran" value="Tidak Hadir" required>
+                        Saya tidak bisa hadir
+                    </label>
+                </div>
+
+                <button type="submit" name="submit_tamu" class="btn-submit">Kirim Do'a dan Ucapan</button>
+            </form>
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>
